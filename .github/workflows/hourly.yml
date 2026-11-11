@@ -1,0 +1,77 @@
+name: Hourly wall
+
+on:
+  schedule:
+    - cron: "7 * * * *"   # every hour at :07
+  workflow_dispatch:
+
+concurrency:
+  group: hourly-wall
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # push data to the gh-pages branch
+  issues: write     # open/close feed-failure issues
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The 7-day headline store lives in the Actions cache, not in git.
+      - name: Restore state
+        uses: actions/cache/restore@v4
+        with:
+          path: state
+          key: state-${{ github.run_id }}
+          restore-keys: state-
+
+      - name: Build wall
+        id: build
+        continue-on-error: true
+        run: python -m pipeline.build
+
+      - name: Save state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: state
+          key: state-${{ github.run_id }}
+
+      - name: Feed failure issues
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/feed_issues.py state/feed_alerts.json
+
+      # gh-pages holds the published data the app reads: data/latest.json + lists/.
+      # It is always a single commit, so hourly updates never bloat the history.
+      - name: Publish data
+        if: steps.build.outcome == 'success'
+        run: |
+          git config user.name "mundo-compacto-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin gh-pages || true
+          mkdir -p /tmp/site
+          if git rev-parse -q --verify origin/gh-pages; then
+            git --work-tree=/tmp/site checkout origin/gh-pages -- .
+          fi
+          mkdir -p /tmp/site/data /tmp/site/lists
+          cp data/latest.json /tmp/site/data/latest.json
+          cp config/stopwords.txt config/crime_terms.txt config/aliases.json config/feeds.json /tmp/site/lists/
+          touch /tmp/site/.nojekyll
+          cd /tmp/site
+          git init -q -b gh-pages
+          git add -A
+          git -c user.name=mundo-compacto-bot -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
+            commit -q -m "Wall $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages
