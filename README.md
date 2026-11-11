@@ -60,4 +60,4 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m unittest discover -s tests -t .
 ```
 
-To run it on your own server instead of Actions: `scripts/run_hourly.sh /var/www/site` from cron (`7 * * * *`).
+To run it on your own server instead of Actions: `scripts/run_hourly.sh /var/www/site` from cron (`17 * * * *`).
