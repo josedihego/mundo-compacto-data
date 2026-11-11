@@ -61,3 +61,9 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 To run it on your own server instead of Actions: `scripts/run_hourly.sh /var/www/site` from cron (`17 * * * *`).
+
+## Reliable hourly runs
+
+GitHub's own `schedule` trigger can be delayed or skipped. A server starts the workflow every hour instead,
+with [scripts/server_trigger.sh](scripts/server_trigger.sh) from cron (`17 * * * *`). It uses a fine-grained token
+limited to this repository with "Actions: read and write". The `schedule` in the workflow stays on as a backup.
