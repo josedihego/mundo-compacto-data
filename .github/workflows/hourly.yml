@@ -1,8 +1,8 @@
 name: Hourly wall
 
 on:
-  schedule:
-    - cron: "17 * * * *"  # every hour at :17 (GitHub drops/delays many runs near :00)
+  # Started every hour at :17 by the Oracle server (scripts/server_trigger.sh).
+  # No GitHub `schedule`: it proved unreliable, and one trigger means one run per hour.
   workflow_dispatch:
 
 concurrency:

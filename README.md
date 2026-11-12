@@ -64,6 +64,6 @@ To run it on your own server instead of Actions: `scripts/run_hourly.sh /var/www
 
 ## Reliable hourly runs
 
-GitHub's own `schedule` trigger can be delayed or skipped. A server starts the workflow every hour instead,
+GitHub's own `schedule` trigger can be delayed or skipped, so the workflow has none. A server starts it every hour
 with [scripts/server_trigger.sh](scripts/server_trigger.sh) from cron (`17 * * * *`). It uses a fine-grained token
-limited to this repository with "Actions: read and write". The `schedule` in the workflow stays on as a backup.
+limited to this repository with "Actions: read and write". The workflow can also be started by hand from the Actions tab.
