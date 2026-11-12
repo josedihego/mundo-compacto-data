@@ -74,4 +74,9 @@ jobs:
           git add -A
           git -c user.name=mundo-compacto-bot -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
             commit -q -m "Wall $(date -u +%Y-%m-%dT%H:%MZ)"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages
+          # GitHub occasionally answers a push with a transient 500; retry before failing.
+          for attempt in 1 2 3; do
+            git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages && exit 0
+            echo "push failed (attempt $attempt), retrying in $((attempt * 20))s"; sleep $((attempt * 20))
+          done
+          exit 1
