@@ -1,0 +1,97 @@
+[
+  {
+    "id": "g1",
+    "name": "g1",
+    "url": "https://g1.globo.com/rss/g1/"
+  },
+  {
+    "id": "folha",
+    "name": "Folha de S.Paulo",
+    "url": "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml"
+  },
+  {
+    "id": "uol",
+    "name": "UOL",
+    "url": "http://rss.uol.com.br/feed/noticias.xml"
+  },
+  {
+    "id": "estadao",
+    "name": "Estadão",
+    "url": "https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/"
+  },
+  {
+    "id": "oglobo",
+    "name": "O Globo",
+    "url": "https://oglobo.globo.com/rss/oglobo"
+  },
+  {
+    "id": "cnn",
+    "name": "CNN Brasil",
+    "url": "https://www.cnnbrasil.com.br/feed/"
+  },
+  {
+    "id": "bbc",
+    "name": "BBC News Brasil",
+    "url": "https://feeds.bbci.co.uk/portuguese/rss.xml"
+  },
+  {
+    "id": "agenciabrasil",
+    "name": "Agência Brasil",
+    "url": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml"
+  },
+  {
+    "id": "poder360",
+    "name": "Poder360",
+    "url": "https://www.poder360.com.br/feed/"
+  },
+  {
+    "id": "metropoles",
+    "name": "Metrópoles",
+    "url": "https://www.metropoles.com/feed"
+  },
+  {
+    "id": "cartacapital",
+    "name": "CartaCapital",
+    "url": "https://www.cartacapital.com.br/feed/"
+  },
+  {
+    "id": "gazeta",
+    "name": "Gazeta do Povo",
+    "url": "https://www.gazetadopovo.com.br/feed/rss/ultimas-noticias.xml"
+  },
+  {
+    "id": "veja",
+    "name": "Veja",
+    "url": "https://veja.abril.com.br/feed/"
+  },
+  {
+    "id": "correio",
+    "name": "Correio Braziliense",
+    "url": "https://www.correiobraziliense.com.br/feed"
+  },
+  {
+    "id": "jovempan",
+    "name": "Jovem Pan",
+    "url": "https://jovempan.com.br/feed"
+  },
+  {
+    "id": "dw",
+    "name": "DW Brasil",
+    "url": "https://rss.dw.com/rdf/rss-br-all"
+  },
+  {
+    "id": "exame",
+    "name": "Exame",
+    "url": "https://exame.com/feed/"
+  },
+  {
+    "id": "infomoney",
+    "name": "InfoMoney",
+    "url": "https://www.infomoney.com.br/feed/"
+  },
+  {
+    "id": "valor",
+    "name": "Valor Econômico",
+    "url": "https://valor.globo.com/rss/valor"
+  }
+]
